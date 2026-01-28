@@ -1,6 +1,6 @@
 morocco-ai-guide/
 ├─ db/
-│  └─ db.json                # fake database (json-server)
+│  └─ db.json                 
 │
 ├─ public/
 │
@@ -8,24 +8,24 @@ morocco-ai-guide/
 │  ├─ db/ 
 │  │  └─ db.json 
 │  ├─ api/
-│  │  ├─ geminiApi.js        # call Gemini AI (from .env)
-│  │  ├─ jsonApi.js          # all fetch() to json-server
-│  │  └─ uploadHelper.js     # image to base64 (optional)
+│  │  ├─ geminiApi.js         
+│  │  ├─ jsonApi.js           
+│  │  └─ uploadHelper.js      
 │  │
 │  ├─ auth/
 │  │  ├─ Login.jsx
 │  │  ├─ Register.jsx
-│  │  └─ authService.js      # fake auth with json-server
+│  │  └─ authService.js       
 │  │
 │  ├─ layouts/
-│  │  ├─ ClientLayout.jsx    # navbar + sidebar (client)
-│  │  ├─ AdminLayout.jsx     # admin sidebar
-│  │  └─ AuthLayout.jsx      # login/register layout
+│  │  ├─ ClientLayout.jsx    
+│  │  ├─ AdminLayout.jsx     
+│  │  └─ AuthLayout.jsx      
 │  │
 │  ├─ routes/
-│  │  ├─ AppRoutes.jsx       # all routes
-│  │  ├─ PrivateRoute.jsx    # user logged in?
-│  │  └─ AdminRoute.jsx      # role === admin?
+│  │  ├─ AppRoutes.jsx       
+│  │  ├─ PrivateRoute.jsx    
+│  │  └─ AdminRoute.jsx      
 │  │
 │  ├─ pages/
 │  │  ├─ admin/
@@ -39,7 +39,8 @@ morocco-ai-guide/
 │  │  ├─ CreatePostPage.jsx
 │  │  ├─ FeedPage.jsx 
 │  │  ├─ PostCard.jsx 
-│  │  └─ ProfilePage.jsx
+│  │  ├─ ProfilePage.jsx  
+│  │  └─ userPosts.jsx
 │  │  
 │  ├─ App.jsx
 │  │

@@ -120,7 +120,7 @@
     },
     {
       "id": 2,
-      "name": "Arjdal Hamid",
+      "name": "Hamid",
       "email": "client@demo.com",
       "password": "1234",
       "role": "client",
@@ -128,11 +128,19 @@
     },
     {
       "id": "8bf5",
-      "name": "Hamid Arjdal",
-      "email": "hamid@demo.com",
+      "name": "Ali",
+      "email": "ali@demo.com",
       "password": "1234",
       "role": "client",
       "createdAt": "2026-01-27T21:37:18.071Z"
+    },
+    {
+      "id": "4029",
+      "name": "Youssef",
+      "email": "Youssef@gmail.com",
+      "password": "Youssef",
+      "role": "client",
+      "createdAt": "2026-01-28T14:37:20.006Z"
     }
   ],
   "posts": [
@@ -150,11 +158,12 @@
         "medina"
       ],
       "likes": {
-        "nbLikes": 3,
+        "nbLikes": 4,
         "userId": [
-          2,
           "8bf5",
-          1
+          1,
+          2,
+          "4029"
         ]
       },
       "createdAt": "2026-01-26T23:33:03.169Z"
@@ -188,6 +197,14 @@
       "userId": 1,
       "text": "Hello Im Admin Of platform ur post really good",
       "createdAt": "2026-01-28T12:15:17.157Z"
+    },
+    {
+      "id": "5f36",
+      "postId": "6b08",
+      "userId": "4029",
+      "text": "Good Post",
+      "createdAt": "2026-01-28T14:37:40.251Z"
     }
-  ]
+  ],
+  "chatsAi": []
 }

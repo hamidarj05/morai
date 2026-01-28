@@ -86,3 +86,17 @@ export function getCommentsByPost(postId) {
 export function addComment(data) {
   return axiosClient.post("/comments", data);
 }
+// ===== CHATS AI =====
+export function getChatsAi({cityId, userId}) {
+  return axiosClient.get("/chatsAi", {
+    params: { cityId, userId },
+  });
+}
+
+export function addChatAiMessage(data) {
+  return axiosClient.post("/chatsAi", data);
+}
+
+export function deleteChatAiMessage(id) {
+  return axiosClient.delete(`/chatsAi/${id}`);
+}

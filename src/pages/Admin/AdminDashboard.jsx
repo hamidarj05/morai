@@ -62,10 +62,7 @@ export default function AdminDashboard() {
     <div>
       <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
-          <div className="text-xl font-extrabold">Admin Dashboard</div>
-          <div className="text-sm text-white/60">
-            Overview of data + quick access
-          </div>
+          <div className="text-xl font-extrabold">Admin Dashboard</div> 
         </div>
 
         <button
@@ -76,7 +73,6 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {/* Stats */}
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {statCard("Cities", cities.length, "Total cities in the app")}
         {statCard("Spots", spots.length, "Places to visit")}
@@ -85,7 +81,6 @@ export default function AdminDashboard() {
         {statCard("Comments", comments.length, "User interactions")}
       </div>
 
-      {/* Quick Actions */}
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
           <div className="font-extrabold">Quick Actions</div>
@@ -109,7 +104,6 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/*Une analyse des villes */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
           <div className="font-extrabold">City Content Check</div>
           <div className="text-sm text-white/60 mt-1">
@@ -153,7 +147,6 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Les posts récents */}
       <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
         <div className="flex items-center justify-between gap-2">
           <div>

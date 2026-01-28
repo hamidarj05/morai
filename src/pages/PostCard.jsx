@@ -10,7 +10,7 @@ export default function PostCard({ post, cityName, user }) {
   const [liked, setLiked] = useState(() =>
     userId ? post.likes.userId.includes(userId) : false
   );
-  console.log(user)
+  
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -118,6 +118,7 @@ export default function PostCard({ post, cityName, user }) {
         </div>
 
         <div className="mt-2 text-lg font-extrabold">{post.title}</div>
+        <div className="mt-2 text-sm text-white/80 whitespace-pre-wrap">Author: {user.name}</div>
         <div className="mt-2 text-sm text-white/80 whitespace-pre-wrap">
           {post.text}
         </div>

@@ -1,68 +1,63 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { askGemini } from "../api/geminiApi";
-import { getCities, getScamsByCity, getSpotsByCity } from "../api/jsonApi"; 
-
+import { getCities, getScamsByCity, getSpotsByCity, getChatsAi, addChatAiMessage, deleteChatAiMessage } from "../api/jsonApi";
 
 export default function ChatPage() {
   const navigate = useNavigate();
   const { cityId } = useParams();
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+  const userId = currentUser.id;
 
   const [cities, setCities] = useState([]);
   const [spots, setSpots] = useState([]);
   const [scams, setScams] = useState([]);
 
   const [messages, setMessages] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // pour stocker les messages
-  const storageKey = "CHAT_CITY_" + cityId;
-  // pour charger les messages quand le composant charge
-  useEffect(() => {
-    setLoaded(false);
-    const saved = localStorage.getItem(storageKey);
-    setMessages(saved ? JSON.parse(saved) : []);
-    setLoaded(true);
-  }, [storageKey]);
-
- 
-  // pour faire défiler la page
   const bottomRef = useRef(null);
 
-  // pour sauvegarder les messages
-  useEffect(() => {
-  if (!loaded) return;
-  localStorage.setItem(storageKey, JSON.stringify(messages));
-}, [messages, storageKey, loaded]);
-
-
-  // pour faire défiler la page (scroll)
+  // scroll down
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  // pour charger les villes + contexte de la ville
+  // charger les villes + contexte de la ville
   useEffect(() => {
     setError("");
 
     getCities()
-      .then((res) => setCities(res.data))
+      .then((res) => setCities(res.data || []))
       .catch(() => setCities([]));
 
     getSpotsByCity(cityId)
-      .then((res) => setSpots(res.data))
+      .then((res) => setSpots(res.data || []))
       .catch(() => setSpots([]));
 
     getScamsByCity(cityId)
-      .then((res) => setScams(res.data))
+      .then((res) => setScams(res.data || []))
       .catch(() => setScams([]));
   }, [cityId]);
 
-  // nom de ville
+  // charger les messages de chat de db.json (par utilisateur + par ville)
+  useEffect(() => {
+    if (!userId) {
+      setMessages([]);
+      return;
+    }
+
+    setError("");
+    getChatsAi({cityId, userId})
+      .then((res) => setMessages(res.data || []))
+      .catch(() => setMessages([])); 
+  }, [cityId, userId]);
+
+  // nom de la ville
   let cityName = "Morocco";
   for (let i = 0; i < cities.length; i++) {
     if (String(cities[i].id) === String(cityId)) {
@@ -71,14 +66,7 @@ export default function ChatPage() {
     }
   }
 
-  function addMessage(role, text) {
-    setMessages((old) => [
-      ...old,
-      { id: Date.now() + Math.random(), role, text },
-    ]);
-  }
-
-  // detecter c'estt l'criture en arabic
+  // detect arabic
   function isArabic(text) {
     return /[\u0600-\u06FF]/.test(text);
   }
@@ -99,67 +87,99 @@ export default function ChatPage() {
     const allowedCities = cities.map((c) => c.name);
     const lang = isArabic(userText) ? "Arabic" : "English";
 
-    // Prompt
     const prompt =
-  `You are a friendly Moroccan local guide chatting on WhatsApp.\n` +
-  `Your tone is natural, helpful, and concise.\n` + 
-  `Language: ${lang}\n\n` +
-
-  `STRICT RULES:\n` +
-  `- Talk ONLY about the city: ${cityName}\n` +
-  `- Cities allowed in this app: ${allowedCities.join(", ")}\n` +
-  `- If the user asks about another city, reply exactly: "This city is not available in the app yet."\n` +
-  `- NEVER invent place names.\n` +
-  `- Use ONLY the places from SPOTS when mentioning locations.\n` +
-  `- You MAY talk about food, plans, tips, or activities, but ONLY if they are clearly related to ${cityName}.\n\n` +
-
-  `ANSWER STYLE (VERY IMPORTANT):\n` +
-  `- Maximum 8 short lines (not more).\n` +
-  `- Use Emogies if Needed.\n` +
-  `- Prefer bullet points (•) when listing.\n` +
-  `- No long paragraphs.\n` +
-  `- Clear, simple sentences.\n` +
-  `- Do NOT use markdown, stars (**), or special formatting.\n\n` +
-
-  `CONTENT STRUCTURE (when relevant):\n` +
-  `- 3–5 main suggestions\n` +
-  `- 1 local tip\n` +
-  `- 1 safety/scam tip if relevant\n\n` +
-
-  `SPOTS (official places you can use):\n` +
-  `${JSON.stringify(topSpots, null, 2)}\n\n` +
-
-  `SCAMS (mention only if relevant):\n` +
-  `${JSON.stringify(topScams, null, 2)}\n\n` +
-
-  `USER MESSAGE:\n${userText}\n\n` +
-
-  `FINAL RULE:\n` +
-  `If the answer risks becoming long, STOP immediately at 8 lines.`;
-
+      `You are a friendly Moroccan local guide chatting on WhatsApp.\n` +
+      `Your tone is natural, helpful, and concise.\n` +
+      `Language: ${lang}\n\n` +
+      `STRICT RULES:\n` +
+      `- Talk ONLY about the city: ${cityName}\n` +
+      `- Cities allowed in this app: ${allowedCities.join(", ")}\n` +
+      `- If the user asks about another city, reply exactly: "This city is not available in the app yet."\n` +
+      `- NEVER invent place names.\n` +
+      `- Use ONLY the places from SPOTS when mentioning locations.\n` +
+      `- You MAY talk about food, plans, tips, or activities, but ONLY if they are clearly related to ${cityName}.\n\n` +
+      `ANSWER STYLE (VERY IMPORTANT):\n` +
+      `- for the name of user use this name ${currentUser.name}\n` +
+      `- Maximum 8 short lines (not more).\n` +
+      `- Use emojis if needed.\n` +
+      `- Prefer bullet points (•) when listing.\n` +
+      `- No long paragraphs.\n` +
+      `- Clear, simple sentences.\n` +
+      `- Do NOT use markdown, stars (**), or special formatting.\n\n` +
+      `CONTENT STRUCTURE (when relevant):\n` +
+      `- 3–5 main suggestions\n` +
+      `- 1 local tip\n` +
+      `- 1 safety/scam tip if relevant\n\n` +
+      `SPOTS:\n${JSON.stringify(topSpots, null, 2)}\n\n` +
+      `SCAMS:\n${JSON.stringify(topScams, null, 2)}\n\n` +
+      `USER MESSAGE:\n${userText}\n\n` +
+      `FINAL RULE:\n` +
+      `If the answer risks becoming long, STOP immediately at 8 lines.`;
 
     return prompt;
   }
 
+  // enregistrer un message dans db.json et mettre à jour l'interface utilisateur
+  async function saveMessage(role, text) {
+    const msg = {
+      cityId: Number(cityId),
+      userId: String(userId),
+      role,
+      text,
+      createdAt: new Date().toISOString(),
+    };
+
+    // afficher instantanément
+    const tempId = "temp-" + Date.now() + Math.random();
+    const optimistic = { ...msg, id: tempId };
+    setMessages((old) => [...old, optimistic]);
+
+    try {
+      const res = await addChatAiMessage(msg);
+      // remplacer temp avec id réel
+      setMessages((old) =>
+        old.map((m) => (m.id === tempId ? res.data : m))
+      );
+      return res.data;
+    } catch (e) {
+      // supprimer temp
+      setMessages((old) => old.filter((m) => m.id !== tempId));
+      throw e;
+    }
+  }
+
   async function send() {
+    if (!userId) {
+      alert("Please login to chat.");
+      return;
+    }
+
     const text = input.trim();
     if (!text || loading) return;
 
     setError("");
-    addMessage("user", text);
     setInput("");
     setLoading(true);
 
     try {
+      await saveMessage("user", text);
+
       const prompt = buildPrompt(text);
       const reply = await askGemini(prompt);
-      addMessage("assistant", reply);
+
+      await saveMessage("assistant", reply);
     } catch (e) {
       setError(String(e.message || e));
-      addMessage(
-        "assistant",
-        "Sorry 😅 I can’t reply now. Check API key / internet."
-      );
+      // afficher un message sans enregistrer
+      setMessages((old) => [
+        ...old,
+        {
+          id: "local-" + Date.now(),
+          role: "assistant",
+          text: "Sorry 😅 I can’t reply now. Check API key / internet.",
+          createdAt: new Date().toISOString(),
+        },
+      ]);
     }
 
     setLoading(false);
@@ -172,17 +192,45 @@ export default function ChatPage() {
     }
   }
 
-  function startChat() {
-    addMessage(
-      "assistant",
-      `Salam 😄 I’m your guide for ${cityName}.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip`
-    );
+  async function startChat() {
+    if (!userId) {
+      alert("Please login to chat.");
+      return;
+    }
+
+    try {
+      await saveMessage(
+        "assistant",
+        `Salam ${currentUser.name} 😄 I’m your guide for ${cityName}.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip`
+      );
+    } catch (e) {
+      setError("Cannot save start message (check json-server).");
+    }
   }
 
-  function clearChat() {
+  async function clearChat() {
+    if (!userId) return;
+
+    // supprimer les messages qui sont déjà enregistrés (pas temp/local)
+    const toDelete = messages.filter((m) => typeof m.id !== "string" ? true : !String(m.id).startsWith("temp-") && !String(m.id).startsWith("local-"));
+
+    // supprimer les messages qui sont déjà enregistrés (pas temp/local)
+    const realMessages = messages.filter(
+      (m) =>
+        m.id &&
+        !String(m.id).startsWith("temp-") &&
+        !String(m.id).startsWith("local-")
+    );
+
     setMessages([]);
-    localStorage.removeItem(storageKey);
+
+    try {
+      await Promise.all(realMessages.map((m) => deleteChatAiMessage(m.id)));
+    } catch (e) {
+      setError("Some messages could not be deleted.");
+    }
   }
+
   return (
     <div className="h-full flex flex-col min-h-0">
       <div className="flex items-center justify-between gap-2 mb-3">
@@ -190,7 +238,6 @@ export default function ChatPage() {
           <div className="text-xl font-extrabold flex items-center gap-2 flex-wrap">
             <span>Chat • {cityName}</span>
 
-            {/* Changer la vile*/}
             <select
               className="rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm"
               value={String(cityId)}
@@ -231,11 +278,10 @@ export default function ChatPage() {
         </div>
       ) : null}
 
-      {/* messages */}
       <div className="flex-1 min-h-0 overflow-y-auto rounded-2xl border border-white/10 bg-white/5 p-3">
         {messages.length === 0 ? (
           <div className="text-white/70">
-            No messages yet. Click <b>Start</b>
+            No messages yet. Click <b><button onClick={startChat}>Start</button></b>
           </div>
         ) : (
           <div className="space-y-3">
@@ -258,7 +304,6 @@ export default function ChatPage() {
               </div>
             ))}
 
-
             {loading ? (
               <div className="flex justify-start">
                 <div className="max-w-[85%] rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-white/70">
@@ -272,7 +317,6 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/*L'input pour envoyer le message comme en clickc sur send ou en tapps entrer*/}
       <div className="mt-3 flex gap-2">
         <textarea
           className="flex-1 min-h-[44px] max-h-[120px] resize-y rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm outline-none"

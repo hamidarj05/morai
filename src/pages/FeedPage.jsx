@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCities, getPosts, getPostsByCity, getUsers } from "../api/jsonApi";
-import PostCard from "./PostCard";
+import PostCard from "./PostCard"; 
 
 export default function FeedPage() {
   const [cities, setCities] = useState([]);
   const [posts, setPosts] = useState([]);
-
+ 
   const [selectedCityId, setSelectedCityId] = useState("all");
   const [loading, setLoading] = useState(false);
 
@@ -58,7 +58,7 @@ export default function FeedPage() {
         <div>
           <div className="text-xl font-extrabold">Community Feed</div>
           <div className="text-sm text-white/60">
-            Posts shared by travelers (city tips + photos)
+            Posts shared by travelers
           </div>
         </div>
 

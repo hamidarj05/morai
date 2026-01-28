@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { getCities, getPosts } from "../api/jsonApi";
+import { useNavigate } from "react-router-dom";
 import MyPostCard from "./MyPostCard";
 
 export default function MyPostsPage() {
+  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(user)
+  const user = JSON.parse(localStorage.getItem("currentUser")); 
   useEffect(() => {
     getCities()
       .then((res) => setCities(res.data || []))
@@ -20,10 +21,8 @@ export default function MyPostsPage() {
     getPosts()
       .then((res) => {
         const all = res.data || [];
-        // Juste les posts de l'utilisateur connecté
-        console.log(all)
-        const userPost = all.filter((p) => String(p.userId) === String(user?.id));
-        console.log(userPost)
+        // Juste les posts de l'utilisateur connecté 
+        const userPost = all.filter((p) => String(p.userId) === String(user?.id)); 
         setPosts(userPost);
       })
       .catch(() => setPosts([]))
@@ -63,7 +62,7 @@ export default function MyPostsPage() {
 
       {!loading && posts.length === 0 ? (
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-white/70">
-          No posts yet. Create one from <b>Create Post</b>.
+          No posts yet. Create one from <b><button onClick={() => navigate("/create")}>Create Post</button></b>.
         </div>
       ) : null}
 
