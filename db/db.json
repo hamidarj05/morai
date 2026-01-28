@@ -1,0 +1,193 @@
+{
+  "cities": [
+    {
+      "id": "1",
+      "name": "Marrakech",
+      "region": "Marrakech-Safi"
+    },
+    {
+      "id": "2",
+      "name": "Casablanca",
+      "region": "Casablanca-Settat"
+    },
+    {
+      "id": "3",
+      "name": "Fes",
+      "region": "Fes-Meknes"
+    },
+    {
+      "id": "4",
+      "name": "Chefchaouen",
+      "region": "Tangier-Tetouan-Al Hoceima"
+    }
+  ],
+  "spots": [
+    {
+      "id": "101",
+      "cityId": 1,
+      "name": "Jemaa el-Fnaa",
+      "area": "Medina",
+      "type": "square",
+      "tip": "Go at sunset.",
+      "durationMin": 90
+    },
+    {
+      "id": "102",
+      "cityId": 1,
+      "name": "Majorelle Garden",
+      "area": "Gueliz",
+      "type": "garden",
+      "tip": "Go early morning.",
+      "durationMin": 60
+    },
+    {
+      "id": "201",
+      "cityId": 2,
+      "name": "Hassan II Mosque",
+      "area": "Corniche",
+      "type": "mosque",
+      "tip": "Check tour times.",
+      "durationMin": 75
+    },
+    {
+      "id": "202",
+      "cityId": 2,
+      "name": "Ain Diab",
+      "area": "Ain Diab",
+      "type": "beach",
+      "tip": "Late afternoon is best.",
+      "durationMin": 90
+    },
+    {
+      "id": "301",
+      "cityId": 3,
+      "name": "Fes el-Bali",
+      "area": "Old Medina",
+      "type": "medina",
+      "tip": "Use an official guide.",
+      "durationMin": 180
+    },
+    {
+      "id": "401",
+      "cityId": 4,
+      "name": "Blue Medina",
+      "area": "Old Town",
+      "type": "medina",
+      "tip": "Best photos in the morning.",
+      "durationMin": 120
+    }
+  ],
+  "scams": [
+    {
+      "id": "1001",
+      "cityId": 1,
+      "title": "Fake guides",
+      "avoid": "Say no politely and keep walking."
+    },
+    {
+      "id": "1002",
+      "cityId": 1,
+      "title": "Overpriced souk items",
+      "avoid": "Compare prices and negotiate."
+    },
+    {
+      "id": "2001",
+      "cityId": 2,
+      "title": "Unofficial parking attendants",
+      "avoid": "Use marked parking or ask inside."
+    },
+    {
+      "id": "3001",
+      "cityId": 3,
+      "title": "Getting lost in medina",
+      "avoid": "Use offline maps or a guide."
+    },
+    {
+      "id": "4001",
+      "cityId": 4,
+      "title": "Photo tip pressure",
+      "avoid": "Ask before taking photos of people."
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@demo.com",
+      "password": "1234",
+      "role": "admin",
+      "createdAt": "2026-01-26T23:33:03.169Z"
+    },
+    {
+      "id": 2,
+      "name": "Arjdal Hamid",
+      "email": "client@demo.com",
+      "password": "1234",
+      "role": "client",
+      "createdAt": "2026-01-26T23:33:03.169Z"
+    },
+    {
+      "id": "8bf5",
+      "name": "Hamid Arjdal",
+      "email": "hamid@demo.com",
+      "password": "1234",
+      "role": "client",
+      "createdAt": "2026-01-27T21:37:18.071Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": "6b08",
+      "cityId": 1,
+      "userId": "8bf5",
+      "type": "moment",
+      "title": "Sunset vibes at Jemaa el-Fnaa",
+      "text": "The atmosphere here is crazy at sunset. Street food, music, people from everywhere. If you come to Marrakech, this is a MUST. \nTip: go up to a café terrace to see everything from above.",
+      "image": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=60",
+      "tags": [
+        "sunset",
+        "food",
+        "medina"
+      ],
+      "likes": {
+        "nbLikes": 3,
+        "userId": [
+          2,
+          "8bf5",
+          1
+        ]
+      },
+      "createdAt": "2026-01-26T23:33:03.169Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": "318e",
+      "postId": "6b08",
+      "userId": "8bf5",
+      "text": "Yes Ur R_",
+      "createdAt": "2026-01-26T23:39:02.393Z"
+    },
+    {
+      "id": "ab64",
+      "postId": "6b08",
+      "userId": "8bf5",
+      "text": "good",
+      "createdAt": "2026-01-26T23:45:21.640Z"
+    },
+    {
+      "id": "58ac",
+      "postId": "6b08",
+      "userId": 2,
+      "text": "dd",
+      "createdAt": "2026-01-27T21:52:18.031Z"
+    },
+    {
+      "id": "9333",
+      "postId": "6b08",
+      "userId": 1,
+      "text": "Hello Im Admin Of platform ur post really good",
+      "createdAt": "2026-01-28T12:15:17.157Z"
+    }
+  ]
+}
