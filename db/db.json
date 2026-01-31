@@ -111,15 +111,15 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin",
-      "email": "admin@demo.com",
+      "email": "admin@gmail.com",
       "password": "1234",
       "role": "admin",
       "createdAt": "2026-01-26T23:33:03.169Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Hamid",
       "email": "client@demo.com",
       "password": "1234",
@@ -160,10 +160,10 @@
       "likes": {
         "nbLikes": 4,
         "userId": [
-          "8bf5",
-          1,
-          2,
-          "4029"
+          "2",
+          "4029",
+          "1",
+          "8bf5"
         ]
       },
       "createdAt": "2026-01-26T23:33:03.169Z"
@@ -206,5 +206,22 @@
       "createdAt": "2026-01-28T14:37:40.251Z"
     }
   ],
-  "chatsAi": []
+  "chatsAi": [
+    {
+      "id": "cb24",
+      "cityId": 1,
+      "userId": "8bf5",
+      "role": "assistant",
+      "text": "Salam Ali 😄 I’m your guide for Marrakech.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip",
+      "createdAt": "2026-01-31T21:35:02.464Z"
+    },
+    {
+      "id": "3446",
+      "cityId": 1,
+      "userId": "2",
+      "role": "assistant",
+      "text": "Salam Hamid 😄 I’m your guide for Marrakech.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip",
+      "createdAt": "2026-01-31T21:35:18.120Z"
+    }
+  ]
 }

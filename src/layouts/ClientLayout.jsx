@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authService";
+ 
+import {
+  AiFillHome,
+  AiOutlinePlusCircle,
+  AiOutlineMessage,
+  AiOutlineFileText,
+  AiOutlineUser, 
+} from "react-icons/ai"; 
 
 export default function ClientLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isAdmin, setIsAdmin] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
+ 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
     const parsedUser = user ? JSON.parse(user) : null;
@@ -15,128 +23,164 @@ export default function ClientLayout() {
       setIsAdmin(true);
     }
   }, []);
-
+  
   function go(path) {
     navigate(path);
-    setSidebarOpen(false);  
   }
-
+ 
   function doLogout() {
     logout();
     navigate("/login");
+  } 
+  function isActive(path) {
+    return location.pathname === path || location.pathname.startsWith(path + "/");
   }
-
-  const NavLinks = () => (
-    <nav className="space-y-2">
-      <button
-        onClick={() => go("/feed")}
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-      >
-        Feed
-      </button>
-
-      <button
-        onClick={() => go("/create")}
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-      >
-        Create Post
-      </button>
-
-      <button
-        onClick={() => go("/chat/1")}
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-      >
-        Ai Guide
-      </button>
-
-      <button
-        onClick={() => go("/userPosts")}
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-      >
-        My Posts
-      </button>
-
-      <button
-        onClick={() => go("/profile")}
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-      >
-        Profile
-      </button>
-
-      <div className="pt-2 mt-2 border-t border-white/10" />
-
-      {isAdmin ? (
-        <button
-          onClick={() => go("/admin")}
-          className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-        >
-          Admin Panel
-        </button>
-      ) : null}
-
-      <button
-        className="w-full text-left block rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
-        onClick={doLogout}
-      >
-        Logout
-      </button>
-    </nav>
-  );
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <div className="mx-auto max-w-6xl p-3 sm:p-4">
-        <div className="rounded-2xl border border-white/10 bg-slate-900/40 overflow-hidden"> 
+      <div className="mx-auto max-w-6xl p-0 sm:p-4">
+        <div className="rounded-none sm:rounded-2xl border-0 sm:border border-white/10 bg-slate-900/40 overflow-hidden">
           <div className="flex items-center justify-between border-b border-white/10 bg-slate-900/60 p-4">
             <div>
               <div className="font-extrabold text-lg">MorAI Guide</div>
               <div className="text-xs text-white/70">Morocco AI Guide</div>
             </div>
- 
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="sm:hidden rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm hover:bg-white/10"
-            >
-              ☰ 
-            </button>
           </div>
- 
-          <div className="grid sm:grid-cols-[260px_1fr] h-[85vh]"> 
+
+          {/* Layout desktop */}
+          <div className="grid sm:grid-cols-[260px_1fr] min-h-[85vh]">
             <div className="hidden sm:block border-r border-white/10 bg-slate-900/60 p-3">
-              <NavLinks />
+              <nav className="space-y-2">
+                <button
+                  onClick={() => go("/feed")}
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                >
+                    Feed
+                </button>
+
+                <button
+                  onClick={() => go("/create")}
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                >
+                     Create Post
+                </button>
+
+                <button
+                  onClick={() => go("/chat/1")}
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                >
+                  Ai Guide
+                </button>
+
+                <button
+                  onClick={() => go("/userPosts")}
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                >
+                  My Posts
+                </button>
+
+                <button
+                  onClick={() => go("/profile")}
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                >
+                   Profile
+                </button>
+
+                <div className="pt-2 mt-2 border-t border-white/10" />
+
+                {isAdmin ? (
+                  <button
+                    onClick={() => go("/admin")}
+                    className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                  >
+                   Admin Panel
+                  </button>
+                ) : null}
+
+                <button
+                  className="w-full text-left flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 hover:bg-white/10"
+                  onClick={doLogout}
+                >
+                   Logout
+                </button>
+              </nav>
             </div>
- 
-            <div className="p-4 overflow-auto">
+
+            <div className="p-4 pb-24 sm:pb-4 overflow-auto">
               <Outlet />
             </div>
           </div>
         </div>
       </div>
 
-       
-      {sidebarOpen ? (
-        <div className="fixed inset-0 z-50 sm:hidden">
-          <div
-            className="absolute inset-0 bg-black/60"
-            onClick={() => setSidebarOpen(false)}
-          />
-          <div className="absolute left-0 top-0 h-full w-[85%] max-w-[320px] border-r border-white/10 bg-slate-950 p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <div className="font-extrabold">Morocco Ai Guide</div>
-              </div>
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm hover:bg-white/10"
-              >
-                ✖
-              </button>
-            </div>
+      {/* style app */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-50 sm:hidden border-t border-white/10 bg-slate-950/90 backdrop-blur"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <div className="grid grid-cols-5">
+          {/* Feed */}
+          <button
+            onClick={() => go("/feed")}
+            className={
+              "py-2 flex flex-col items-center gap-1 " +
+              (isActive("/feed") ? "text-white" : "text-white/60")
+            }
+          >
+            <AiFillHome className="text-2xl" />
+            <span className="text-[11px]">Feed</span>
+          </button>
 
-            <NavLinks />
-          </div>
+          {/* Create */}
+          <button
+            onClick={() => go("/create")}
+            className={
+              "py-2 flex flex-col items-center gap-1 " +
+              (isActive("/create") ? "text-white" : "text-white/60")
+            }
+          >
+            <AiOutlinePlusCircle className="text-2xl" />
+            <span className="text-[11px]">Create</span>
+          </button>
+
+          {/* AI */}
+          <button
+            onClick={() => go("/chat/1")}
+            className={
+              "py-2 flex flex-col items-center gap-1 " +
+              (isActive("/chat") ? "text-white" : "text-white/60")
+            }
+          >
+            <AiOutlineMessage className="text-2xl" />
+            <span className="text-[11px]">AI</span>
+          </button>
+
+          {/* Posts */}
+          <button
+            onClick={() => go("/userPosts")}
+            className={
+              "py-2 flex flex-col items-center gap-1 " +
+              (isActive("/userPosts") ? "text-white" : "text-white/60")
+            }
+          >
+            <AiOutlineFileText className="text-2xl" />
+            <span className="text-[11px]">Posts</span>
+          </button>
+
+          {/* Profile */}
+          <button
+            onClick={() => go("/profile")}
+            className={
+              "py-2 flex flex-col items-center gap-1 " +
+              (isActive("/profile") ? "text-white" : "text-white/60")
+            }
+          >
+            <AiOutlineUser className="text-2xl" />
+            <span className="text-[11px]">Profil</span>
+          </button>
         </div>
-      ) : null}
+ 
+      </div>
     </div>
   );
 }
