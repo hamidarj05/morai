@@ -160,10 +160,10 @@
       "likes": {
         "nbLikes": 4,
         "userId": [
-          "2",
           "4029",
           "1",
-          "8bf5"
+          "8bf5",
+          "2"
         ]
       },
       "createdAt": "2026-01-26T23:33:03.169Z"
@@ -216,12 +216,68 @@
       "createdAt": "2026-01-31T21:35:02.464Z"
     },
     {
-      "id": "3446",
+      "id": "37dc",
+      "cityId": 1,
+      "userId": "2",
+      "role": "user",
+      "text": "c",
+      "createdAt": "2026-02-03T00:28:13.232Z"
+    },
+    {
+      "id": "6ea1",
       "cityId": 1,
       "userId": "2",
       "role": "assistant",
-      "text": "Salam Hamid 😄 I’m your guide for Marrakech.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip",
-      "createdAt": "2026-01-31T21:35:18.120Z"
+      "text": "Ahlan Hamid! 👋 Welcome to Marrakech!\nHow can I help you today?\nHere are some ideas for your visit:\n• Explore Jemaa el-Fnaa at sunset.\n• Visit Majorelle Garden early morning.\nLocal tip: Try some fresh orange juice in the Medina! 🍊\nSafety tip: Watch out for fake guides. Say no politely.\nEnjoy your time here!",
+      "createdAt": "2026-02-03T00:28:17.688Z"
+    },
+    {
+      "id": "e8d7",
+      "cityId": 1,
+      "userId": "2",
+      "role": "user",
+      "text": "c",
+      "createdAt": "2026-02-03T00:28:19.168Z"
+    },
+    {
+      "id": "9ab2",
+      "cityId": 1,
+      "userId": "2",
+      "role": "assistant",
+      "text": "Ahlan Hamid! 👋\nWelcome to Marrakech!\nHow can I help you discover our beautiful city today?\nAre you looking for:\n• Places to visit?\n• Food recommendations?\n• Tips for getting around?\nLet me know!",
+      "createdAt": "2026-02-03T00:28:21.587Z"
+    },
+    {
+      "id": "1f28",
+      "cityId": 1,
+      "userId": "2",
+      "role": "user",
+      "text": "v",
+      "createdAt": "2026-02-03T00:28:22.273Z"
+    },
+    {
+      "id": "50b8",
+      "cityId": 1,
+      "userId": "2",
+      "role": "assistant",
+      "text": "Ahlan Hamid! 👋\nLooks like you sent a quick message.\nHow can I help you discover Marrakech today?\nJust ask me anything about our beautiful city!",
+      "createdAt": "2026-02-03T00:28:23.633Z"
+    },
+    {
+      "id": "e078",
+      "cityId": 1,
+      "userId": "2",
+      "role": "user",
+      "text": "hello",
+      "createdAt": "2026-02-03T00:28:32.798Z"
+    },
+    {
+      "id": "0267",
+      "cityId": 1,
+      "userId": "2",
+      "role": "assistant",
+      "text": "Marhaba Hamid! 👋\nWelcome to Marrakech! I'm here to help you explore our beautiful city.\nWhat can I do for you today? 😊",
+      "createdAt": "2026-02-03T00:28:36.057Z"
     }
   ]
 }

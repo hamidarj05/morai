@@ -106,7 +106,7 @@ export default function ClientLayout() {
               </nav>
             </div>
 
-            <div className="p-4 pb-24 sm:pb-4 overflow-auto">
+            <div className="p-4 pb-24 sm:pb-4 overflow-auto h-screen flex flex-col">
               <Outlet />
             </div>
           </div>

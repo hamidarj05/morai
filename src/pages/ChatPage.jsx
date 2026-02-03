@@ -211,9 +211,7 @@ export default function ChatPage() {
   async function clearChat() {
     if (!userId) return;
 
-    // supprimer les messages qui sont déjà enregistrés (pas temp/local)
-    const toDelete = messages.filter((m) => typeof m.id !== "string" ? true : !String(m.id).startsWith("temp-") && !String(m.id).startsWith("local-"));
-
+    
     // supprimer les messages qui sont déjà enregistrés (pas temp/local)
     const realMessages = messages.filter(
       (m) =>
