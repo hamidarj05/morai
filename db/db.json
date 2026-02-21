@@ -111,43 +111,19 @@
   ],
   "users": [
     {
-      "id": "1",
-      "name": "Admin",
-      "email": "admin@gmail.com",
-      "password": "1234",
-      "role": "admin",
-      "createdAt": "2026-01-26T23:33:03.169Z"
-    },
-    {
-      "id": "2",
-      "name": "Hamid",
-      "email": "client@demo.com",
-      "password": "1234",
-      "role": "client",
-      "createdAt": "2026-01-26T23:33:03.169Z"
-    },
-    {
-      "id": "8bf5",
+      "id": "fb75",
       "name": "Ali",
-      "email": "ali@demo.com",
-      "password": "1234",
+      "email": "Ali@gmail.com",
+      "password": "Ali12",
       "role": "client",
-      "createdAt": "2026-01-27T21:37:18.071Z"
-    },
-    {
-      "id": "4029",
-      "name": "Youssef",
-      "email": "Youssef@gmail.com",
-      "password": "Youssef",
-      "role": "client",
-      "createdAt": "2026-01-28T14:37:20.006Z"
+      "createdAt": "2026-02-21T23:50:27.654Z"
     }
   ],
   "posts": [
     {
       "id": "6b08",
       "cityId": 1,
-      "userId": "8bf5",
+      "userId": "fb75",
       "type": "moment",
       "title": "Sunset vibes at Jemaa el-Fnaa",
       "text": "The atmosphere here is crazy at sunset. Street food, music, people from everywhere. If you come to Marrakech, this is a MUST. \nTip: go up to a café terrace to see everything from above.",
@@ -158,126 +134,12 @@
         "medina"
       ],
       "likes": {
-        "nbLikes": 4,
-        "userId": [
-          "4029",
-          "1",
-          "8bf5",
-          "2"
-        ]
+        "nbLikes": 0,
+        "userId": []
       },
       "createdAt": "2026-01-26T23:33:03.169Z"
     }
   ],
-  "comments": [
-    {
-      "id": "318e",
-      "postId": "6b08",
-      "userId": "8bf5",
-      "text": "Yes Ur R_",
-      "createdAt": "2026-01-26T23:39:02.393Z"
-    },
-    {
-      "id": "ab64",
-      "postId": "6b08",
-      "userId": "8bf5",
-      "text": "good",
-      "createdAt": "2026-01-26T23:45:21.640Z"
-    },
-    {
-      "id": "58ac",
-      "postId": "6b08",
-      "userId": 2,
-      "text": "dd",
-      "createdAt": "2026-01-27T21:52:18.031Z"
-    },
-    {
-      "id": "9333",
-      "postId": "6b08",
-      "userId": 1,
-      "text": "Hello Im Admin Of platform ur post really good",
-      "createdAt": "2026-01-28T12:15:17.157Z"
-    },
-    {
-      "id": "5f36",
-      "postId": "6b08",
-      "userId": "4029",
-      "text": "Good Post",
-      "createdAt": "2026-01-28T14:37:40.251Z"
-    }
-  ],
-  "chatsAi": [
-    {
-      "id": "cb24",
-      "cityId": 1,
-      "userId": "8bf5",
-      "role": "assistant",
-      "text": "Salam Ali 😄 I’m your guide for Marrakech.\n• Best things to do\n• 1-day plan\n• Food to try\n• Safety tip",
-      "createdAt": "2026-01-31T21:35:02.464Z"
-    },
-    {
-      "id": "37dc",
-      "cityId": 1,
-      "userId": "2",
-      "role": "user",
-      "text": "c",
-      "createdAt": "2026-02-03T00:28:13.232Z"
-    },
-    {
-      "id": "6ea1",
-      "cityId": 1,
-      "userId": "2",
-      "role": "assistant",
-      "text": "Ahlan Hamid! 👋 Welcome to Marrakech!\nHow can I help you today?\nHere are some ideas for your visit:\n• Explore Jemaa el-Fnaa at sunset.\n• Visit Majorelle Garden early morning.\nLocal tip: Try some fresh orange juice in the Medina! 🍊\nSafety tip: Watch out for fake guides. Say no politely.\nEnjoy your time here!",
-      "createdAt": "2026-02-03T00:28:17.688Z"
-    },
-    {
-      "id": "e8d7",
-      "cityId": 1,
-      "userId": "2",
-      "role": "user",
-      "text": "c",
-      "createdAt": "2026-02-03T00:28:19.168Z"
-    },
-    {
-      "id": "9ab2",
-      "cityId": 1,
-      "userId": "2",
-      "role": "assistant",
-      "text": "Ahlan Hamid! 👋\nWelcome to Marrakech!\nHow can I help you discover our beautiful city today?\nAre you looking for:\n• Places to visit?\n• Food recommendations?\n• Tips for getting around?\nLet me know!",
-      "createdAt": "2026-02-03T00:28:21.587Z"
-    },
-    {
-      "id": "1f28",
-      "cityId": 1,
-      "userId": "2",
-      "role": "user",
-      "text": "v",
-      "createdAt": "2026-02-03T00:28:22.273Z"
-    },
-    {
-      "id": "50b8",
-      "cityId": 1,
-      "userId": "2",
-      "role": "assistant",
-      "text": "Ahlan Hamid! 👋\nLooks like you sent a quick message.\nHow can I help you discover Marrakech today?\nJust ask me anything about our beautiful city!",
-      "createdAt": "2026-02-03T00:28:23.633Z"
-    },
-    {
-      "id": "e078",
-      "cityId": 1,
-      "userId": "2",
-      "role": "user",
-      "text": "hello",
-      "createdAt": "2026-02-03T00:28:32.798Z"
-    },
-    {
-      "id": "0267",
-      "cityId": 1,
-      "userId": "2",
-      "role": "assistant",
-      "text": "Marhaba Hamid! 👋\nWelcome to Marrakech! I'm here to help you explore our beautiful city.\nWhat can I do for you today? 😊",
-      "createdAt": "2026-02-03T00:28:36.057Z"
-    }
-  ]
+  "comments": [],
+  "chatsAi": []
 }

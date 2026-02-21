@@ -4,13 +4,13 @@ import { getCurrentUser } from "../auth/authService";
 
 export default function PostCard({ post, cityName, user }) {
 
-  const userId = getCurrentUser().id  ;
-  const [likes, setLikes] = useState(post.likes);
+  const userId = getCurrentUser().id;
+  const [likes, setLikes] = useState(post.likes); 
 
   const [liked, setLiked] = useState(() =>
     userId ? post.likes.userId.includes(userId) : false
   );
-  
+
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -122,7 +122,7 @@ export default function PostCard({ post, cityName, user }) {
         <div className="mt-2 text-sm text-white/80 whitespace-pre-wrap">
           {post.text}
         </div>
- 
+
         {Array.isArray(post.tags) && post.tags.length > 0 ? (
           <div className="mt-3 flex flex-wrap gap-2">
             {post.tags.map((t, idx) => (
@@ -135,7 +135,7 @@ export default function PostCard({ post, cityName, user }) {
             ))}
           </div>
         ) : null}
- 
+
         <div className="mt-4 flex items-center gap-2">
           <button
             onClick={toggleLike}
@@ -146,7 +146,7 @@ export default function PostCard({ post, cityName, user }) {
                 : "border-white/10 bg-white/5 hover:bg-white/10",
             ].join(" ")}
           >
-            {liked ? "💔 Unlike" : "❤️ Like"} ({likes.nbLikes})
+            ❤️ Like ({likes.nbLikes})
           </button>
 
           <button
@@ -156,7 +156,7 @@ export default function PostCard({ post, cityName, user }) {
             💬 Comments
           </button>
         </div>
- 
+
         {showComments ? (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div
