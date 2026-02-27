@@ -117,6 +117,14 @@
       "password": "Ali12",
       "role": "client",
       "createdAt": "2026-02-21T23:50:27.654Z"
+    },
+    {
+      "id": "212b",
+      "name": "jjj",
+      "email": "jjj@gmail.com",
+      "password": "Ali12",
+      "role": "client",
+      "createdAt": "2026-02-27T09:58:30.236Z"
     }
   ],
   "posts": [
@@ -134,12 +142,29 @@
         "medina"
       ],
       "likes": {
-        "nbLikes": 0,
-        "userId": []
+        "nbLikes": 1,
+        "userId": [
+          "212b"
+        ]
       },
       "createdAt": "2026-01-26T23:33:03.169Z"
     }
   ],
-  "comments": [],
+  "comments": [
+    {
+      "id": "fb94",
+      "postId": "6b08",
+      "userId": "fb75",
+      "text": "lll",
+      "createdAt": "2026-02-27T09:58:19.106Z"
+    },
+    {
+      "id": "8bf6",
+      "postId": "6b08",
+      "userId": "212b",
+      "text": "Good",
+      "createdAt": "2026-02-27T09:58:46.479Z"
+    }
+  ],
   "chatsAi": []
 }

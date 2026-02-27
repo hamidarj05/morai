@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { addComment, getCommentsByPost, updatePost } from "../api/jsonApi";
+import { addComment, getCommentsByPost, updatePost, getUsers } from "../api/jsonApi";
 import { getCurrentUser } from "../auth/authService";
 
 export default function PostCard({ post, cityName, user }) {
 
   const userId = getCurrentUser().id;
-  const [likes, setLikes] = useState(post.likes); 
+  const [likes, setLikes] = useState(post.likes);
 
   const [liked, setLiked] = useState(() =>
     userId ? post.likes.userId.includes(userId) : false
@@ -13,6 +13,16 @@ export default function PostCard({ post, cityName, user }) {
 
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = async () => {
+    const res = await getUsers();
+    setUsers(res.data);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const [commentText, setCommentText] = useState("");
   const [loadingComment, setLoadingComment] = useState(false);
@@ -187,10 +197,15 @@ export default function PostCard({ post, cityName, user }) {
                         key={c.id}
                         className="rounded-xl border border-white/10 bg-white/5 p-2"
                       >
-                        <div className="text-xs text-white/60">
-                          {c.createdAt
+                        <div className="text-xs text-white/60" style={{ display: "flex"  }}>
+                          
+                          <p>{c.createdAt
                             ? new Date(c.createdAt).toLocaleString()
-                            : ""}
+                            : ""}</p><p
+                            style={{margin :' 0 10px'}} 
+                            > By :
+                            {users.find((u) => u.id === c.userId)?.name}
+                          </p>
                         </div>
                         <div className="text-sm text-white/85 whitespace-pre-wrap">
                           {c.text}
